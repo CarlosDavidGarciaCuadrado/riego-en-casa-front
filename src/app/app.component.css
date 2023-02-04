@@ -1,0 +1,13 @@
+#contenedor-tabla{
+    height: 50%;
+    width: 80%;
+    margin-left: 10%;
+    overflow-y: scroll;
+}
+#paginator-cont{
+    width: 80%;
+    margin-left: 10%;
+}
+.titulos{
+    text-align: center;
+}
