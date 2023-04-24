@@ -1,13 +1,25 @@
-#contenedor-tabla{
-    height: 50%;
+#contenedor{
+    height: 60%;
     width: 80%;
     margin-left: 10%;
+}
+
+#contenedor-tabla{
+    height: 80%;
+    width: 100%;
     overflow-y: scroll;
 }
+
 #paginator-cont{
     width: 80%;
     margin-left: 10%;
 }
+
+#buttonGrafic{
+    text-align-last: end;
+    width: 90%;
+}
+
 .titulos{
     text-align: center;
 }

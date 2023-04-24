@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatTableModule,
+    MatButtonModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule, 
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

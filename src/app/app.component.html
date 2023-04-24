@@ -3,37 +3,36 @@
     <span>Sistema de Riego</span>
   </mat-toolbar-row>
 </mat-toolbar>
-
-<h1 class="titulos">datos en el ambiente del terreno</h1>
-
+<br><br><br>
+<h1 class="titulos">Historial de datos en el ambiente del terreno</h1>
+<div id="buttonGrafic">
+  <button mat-raised-button color="primary" (click)="mostrarGraficOrTable()">{{buttonName}}</button>
+</div>
+<br><br><br>
+<div id="contenedor" *ngIf="!mostrarGrafic">
 <div id="contenedor-tabla">
    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <!-- Position Column -->
+
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
     </ng-container>
-  
-    <!-- Name Column -->
+
     <ng-container matColumnDef="temperatura">
       <th mat-header-cell *matHeaderCellDef> Temperatura </th>
       <td mat-cell *matCellDef="let element"> {{element.tempAmbiente}} </td>
     </ng-container>
-  
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="humAmbiente">
       <th mat-header-cell *matHeaderCellDef> Humedad Ambiente </th>
       <td mat-cell *matCellDef="let element"> {{element.humAmbiente}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="humTerreno">
       <th mat-header-cell *matHeaderCellDef> Humedad Terreno </th>
       <td mat-cell *matCellDef="let element"> {{element.humTerreno}} </td>
     </ng-container>
-  
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="phTerreno">
       <th mat-header-cell *matHeaderCellDef> PH </th>
       <td mat-cell *matCellDef="let element"> {{element.phTerreno}} </td>
@@ -51,4 +50,25 @@
                             [pageIndex]="currentPage" 
                             (page)="handlePage($event)">
   </mat-paginator>
- 
+</div>
+
+
+  <div id="contenedor" *ngIf="mostrarGrafic">
+  <ngx-charts-bar-vertical-2d
+  [view]="view"
+  scheme="cool"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [legendTitle]="legendTitle"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)">
+</ngx-charts-bar-vertical-2d>
+</div>
