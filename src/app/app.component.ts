@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServiceService } from './service.service';
+import { Meses, ModelNameValue, ModelSerie } from './models';
 
 @Component({
   selector: 'app-root',
@@ -21,62 +22,7 @@ showYAxisLabel: boolean = true;
 yAxisLabel: string = 'Agua Usada';
 legendTitle: string = 'Sistema de Riego Usado';
 view:[number, number] = [1100, 400];
-multi= [
-  {
-    "name": "Enero",
-    "series": [
-      {
-        "name": "IrrigationSistem",
-        "value": 7300000
-      },
-      {
-        "name": "Convencional",
-        "value": 8300000
-      }
-    ]
-  },
-
-  {
-    "name": "Febrero",
-    "series": [
-      {
-        "name": "IrrigationSistem",
-        "value": 7870000
-      },
-      {
-        "name": "Convencional",
-        "value": 8270000
-      }
-    ]
-  },
-
-  {
-    "name": "Marzo",
-    "series": [
-      {
-        "name": "IrrigationSistem",
-        "value": 5000002
-      },
-      {
-        "name": "Convencional",
-        "value": 5800000
-      }
-    ]
-  },
-  {
-    "name": "Abril",
-    "series": [
-      {
-        "name": "IrrigationSistem",
-        "value": 5000002
-      },
-      {
-        "name": "Convencional",
-        "value": 5800000
-      }
-    ]
-  }
-];
+multi : any= [];
   buttonName: string = 'Mostrar Gráfica';
   mostrarGrafic:boolean = false;
   array: any;
@@ -86,6 +32,8 @@ multi= [
   title = 'riego-sistematizado';
   displayedColumns: string[] = ['position', 'temperatura', 'humAmbiente', 'humTerreno', 'phTerreno'];
   dataSource = new MatTableDataSource();
+  meses: Meses = new Meses;
+  seriesR!: ModelSerie;
 
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
@@ -113,10 +61,19 @@ private iterator() {
 getData(){
   try {
     this.service.getListAll().subscribe((res: any) => {
-      this.dataSource = res;
+      var resp:any;    
+      for (const iterator of res.data) {
+        resp = this.meses.llenarSeries(iterator.fecha, iterator.tiempoRiego);
+        this.seriesR = {
+          "name" : resp[0].name,
+          "series" : resp[0].series
+        }
+        this.multi.push(this.seriesR);
+      }
+      this.dataSource = res.data;
       this.dataSource.paginator = this.paginator;
-      this.array = res;
-      this.totalSize = res.length;
+      this.array = res.data;
+      this.totalSize = res.data.length;
       this.iterator();
     });
   } catch(err) {
