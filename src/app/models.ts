@@ -1,4 +1,4 @@
-import { formatDate } from "@angular/common";
+import { DatePipe, formatDate } from "@angular/common";
 
  export interface ModelNameValue{
         "name": string,
@@ -12,7 +12,15 @@ import { formatDate } from "@angular/common";
 
   export class Meses {
 
-    private meses:string[] = [
+    dias: string[] = [
+        'lunes', 
+        'martes',
+        'miercoles',
+        'jueves',
+        'viernes'
+    ];
+
+    meses:string[] = [
         'Enero','Febrero','Marzo',
         'Abril','Mayo','Junio',
         'Julio','Agosto','Septiembre',
@@ -27,6 +35,7 @@ import { formatDate } from "@angular/common";
         value: 50000000
     };
     mesesNameValue : any[] = [];
+    diasNameValue : any[] = [];
     series : any[] = [];
 
     public constructor(){

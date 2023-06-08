@@ -3,6 +3,8 @@ import { MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServiceService } from './service.service';
 import { Meses, ModelNameValue, ModelSerie } from './models';
+import { DatePipe } from '@angular/common';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ import { Meses, ModelNameValue, ModelSerie } from './models';
 })
 export class AppComponent{
 
+  nCaracterMax: number = 0;
 // options
 showXAxis: boolean = true;
 showYAxis: boolean = true;
@@ -19,7 +22,7 @@ showLegend: boolean = true;
 showXAxisLabel: boolean = true;
 xAxisLabel: string = 'Meses';
 showYAxisLabel: boolean = true;
-yAxisLabel: string = 'Agua Usada';
+yAxisLabel: string = 'Agua Usada(mL)';
 legendTitle: string = 'Sistema de Riego Usado';
 view:[number, number] = [1100, 400];
 multi : any= [];
@@ -30,15 +33,20 @@ multi : any= [];
   currentPage = 0;
   totalSize = 0;
   title = 'riego-sistematizado';
-  displayedColumns: string[] = ['position', 'temperatura', 'humAmbiente', 'humTerreno', 'phTerreno'];
+  displayedColumns: string[] = ['position', 'temperatura', 'humAmbiente', 'humTerreno'];
   dataSource = new MatTableDataSource();
-  meses: Meses = new Meses;
+  meses: Meses = new Meses();
   seriesR!: ModelSerie;
+  toppings = new FormControl();
+  toppingList: string[] = this.meses.meses;
+  dia = new FormControl();
+  diasList: string[] = this.meses.dias;
+  selected = '';
 
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
 
-  constructor(private service: ServiceService, private pag: MatPaginatorIntl){
+  constructor(private service: ServiceService, private pag: MatPaginatorIntl, private datePipe: DatePipe){
     this.pag.itemsPerPageLabel = "Registros por página";
   }
 
@@ -99,6 +107,19 @@ mostrarGraficOrTable(){
   this.buttonName = !this.mostrarGrafic ? 'Mostrar Gráfica':'Mostrar Tabla';
 }
 
+capturarCaracteres(event:any){
+  this.nCaracterMax = event;
+}
 
+filtrar(event: Event) {
+  const filtro = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filtro.trim().toLowerCase();
+} 
+
+getDia(data: any){
+  const dateObj = new Date(data);
+  const nombreDia = this.datePipe.transform(dateObj, 'EEEE');
+  return nombreDia;
+}
 
 }

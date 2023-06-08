@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServiceService {
 
-  apiUrl =  'http://localhost:1020/IrrigationSystem/';
+  apiUrl =  'http://localhost:1020/unicor-investigation/api/IrrigationSystem/';
 
   constructor(private http: HttpClient) { }
 
