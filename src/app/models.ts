@@ -30,10 +30,7 @@ import { DatePipe, formatDate } from "@angular/common";
     tipoRiego!: ModelNameValue;
     tipoRiegoSistema!: ModelNameValue;
     tipoSerie!: ModelSerie;
-    tipoRiegoConvencional: ModelNameValue = {
-        name: "Convencional",
-        value: 50000000
-    };
+    tipoRiegoConvencional!: ModelNameValue;
     mesesNameValue : any[] = [];
     diasNameValue : any[] = [];
     series : any[] = [];
@@ -58,16 +55,20 @@ import { DatePipe, formatDate } from "@angular/common";
         return meses;
     }
 
-    llenarSeries(fecha: any, tiempoRiego: any){
+    llenarSeries(fecha: any, tiempoRiego: any, numRiego:any){
         var multi : any[] = [];
-        this.tipoRiegoSistema={
+        this.tipoRiegoSistema = {
             "name": 'IrrigationSistem',
             "value": tiempoRiego
              }
+        this.tipoRiegoConvencional = {
+            name: "Convencional",
+            value: 4*numRiego
+        };   
         this.series.push(this.tipoRiegoSistema);       
         this.series.push(this.tipoRiegoConvencional); 
         this.tipoSerie={
-            "name": this.getMes(fecha).name,
+            "name": this.getMes2(fecha),
             "series": this.series
              }
         multi.push(this.tipoSerie);
@@ -84,6 +85,10 @@ import { DatePipe, formatDate } from "@angular/common";
         return mes;
     }
 
+    getMes2(data:any){
+        return this.meses[data];
+    }
+
     getConsumo(cantidadTiempo:any){
         return 1*cantidadTiempo;
         }
@@ -95,7 +100,7 @@ import { DatePipe, formatDate } from "@angular/common";
             var minutos = (residuo-mr)/60000;
             var sr = mr%1000;
             var segundos = (mr-sr)/1000;
-            return "HH:"+horas+" M:"+minutos+" S:"+segundos;
+            return horas + "h:" + minutos + "m:" + segundos + "s";
         }
 
   }

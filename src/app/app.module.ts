@@ -15,6 +15,12 @@ import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { LOCALE_ID } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -33,7 +39,13 @@ registerLocaleData(localeEs);
     NgxChartsModule,
     MatInputModule,
     CommonModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatFormFieldModule
   ],
   providers: [
     DatePipe,

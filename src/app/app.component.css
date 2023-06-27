@@ -1,7 +1,7 @@
 #contenedor{
     height: 60%;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    margin-left: 1%;
 }
 
 #contenedor-tabla{
@@ -16,10 +16,36 @@
 }
 
 #buttonGrafic{
-    text-align-last: end;
-    width: 90%;
+  display: inline;
+  margin-left: 10%;
+  width: 10%;
+  align-content: center;
 }
 
 .titulos{
     text-align: center;
 }
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .formFecha {
+    width: 90%;
+  }
+
+  mat-form-field {
+    margin-left: 5%;
+  }
+
+  #buscar{
+    margin-left: 5%;
+    width: 10%;
+    align-content: center;
+  }
